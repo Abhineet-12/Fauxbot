@@ -51,9 +51,7 @@ public class ShooterMechanism implements IMechanism {
         //Hood angle position
         double analogHoodPosition = this.driver.getAnalog(AnalogOperation.ShooterHoodAnglePosition);
         this.hoodMotor.set(analogHoodPosition);
-
-        System.out.println("Joystick Position: " + analogHoodPosition);
-
+        
         //Spin button
 
         if (this.driver.getDigital(DigitalOperation.ShooterSpinButton)) {

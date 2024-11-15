@@ -99,7 +99,6 @@ public class GarageDoorMechanism implements IMechanism {
                 break;
         }
 
-        System.out.println(reversing);
     }
 
     @Override

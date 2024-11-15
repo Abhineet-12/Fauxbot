@@ -65,8 +65,6 @@ public class PrinterMechanism implements IMechanism {
             this.targetXAxisPosition = Math.max(0, Math.min(200, this.targetXAxisPosition));
             this.targetYAxisPosition = Math.max(0, Math.min(200, this.targetYAxisPosition));
 
-            System.out.println("Smooth mode on");
-
         } else {
             targetXAxisPosition = convertRange(joystickXAxis);
             targetYAxisPosition = convertRange(joystickYAxis);
