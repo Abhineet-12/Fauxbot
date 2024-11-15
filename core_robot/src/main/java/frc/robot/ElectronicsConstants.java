@@ -5,12 +5,10 @@ import frc.lib.robotprovider.PowerDistributionModuleType;
 
 /**
  * All constants describing how the electronics are plugged together.
- * 
+ *
  * @author Will
- * 
  */
-public class ElectronicsConstants
-{
+public class ElectronicsConstants {
     // We expect the following to be true.  Change INVERT_*_AXIS to true if any of the following are not met:
     // 1. forwards/up on a joystick is positive, backwards/down is negative.
     // 2. right on a joystick is positive, left on a joystick is negative.
@@ -53,13 +51,36 @@ public class ElectronicsConstants
 
     //================================================== Garage Door =======================================================
 
+    public static final int GARAGE_MOTOR_CH_ID = 0;
+    public static final int GARAGE_SENSOR_CH_BLOCKED_ID = 0;
+    public static final int GARAGE_SENSOR_CH_OPEN_ID = 1;
+    public static final int GARAGE_SENSOR_CH_CLOSED_ID = 2;
+
     //================================================== Elevator ==========================================================
 
-    //================================================== Forklift =======================================================
+    public static final int ELEVATOR_MOTOR_CH_ID = 0;
+    public static final int ELEVATOR_ENCODER_CH_A_ID = 0;
+    public static final int ELEVATOR_ENCODER_CH_B_ID = 1;
 
     //================================================== Forklift =======================================================
+
+    public static final int FORKLIFT_LEFT_MOTOR_CH_ID = 0;
+    public static final int FORKLIFT_RIGHT_MOTOR_CH_ID = 1;
+    public static final int FORKLIFT_PISTON_FORWARD_CH_ID = 7;
+    public static final int FORKLIFT_PISTON_REVERSE_CH_ID = 8;
 
     //================================================== Shooter =======================================================
 
+    public static final int SHOOTER_HOOD_MOTOR_CH_ID = 0;
+    public static final int SHOOTER_FLYWHEEL_MOTOR_CH_ID = 1;
+    public static final int SHOOTER_KICKER_SOLENOID_FORWARD_CH_ID = 7;
+    public static final int SHOOTER_KICKER_SOLENOID_REVERSE_CH_ID = 8;
+    public static final double SHOOTER_KICKER_TIMEOUT = 5;
+
     //================================================== Printer =======================================================
+
+    public static final int PRINTER_X_AXIS_MOTOR_CH_ID = 0;
+    public static final int PRINTER_Y_AXIS_MOTOR_CH_ID = 1;
+    public static final int PRINTER_PEN_SOLENOID_FORWARD_CH_ID = 7;
+    public static final int PRINTER_PEN_SOLENOID_REVERSE_CH_ID = 8;
 }

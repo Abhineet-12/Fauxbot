@@ -1,10 +1,5 @@
 package frc.robot.simulation;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import frc.lib.robotprovider.*;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -13,10 +8,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import frc.lib.robotprovider.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Singleton
-public class PrinterSimulator extends SimulatorBase
-{
+public class PrinterSimulator extends SimulatorBase {
     private static final FauxbotActuatorConnection XMotorConnection = new FauxbotActuatorConnection(FauxbotActuatorConnection.ActuatorConnector.CAN, 0);
     private static final FauxbotActuatorConnection YMotorConnection = new FauxbotActuatorConnection(FauxbotActuatorConnection.ActuatorConnector.CAN, 1);
     private static final FauxbotSensorConnection XEncoderConnection = new FauxbotSensorConnection(FauxbotSensorConnection.SensorConnector.CAN, FauxbotTalonSRX.class, 0);
@@ -25,24 +23,23 @@ public class PrinterSimulator extends SimulatorBase
     private static final FauxbotActuatorConnection PenReverseConnection = new FauxbotActuatorConnection(FauxbotActuatorConnection.ActuatorConnector.PCM0B, 8);
 
     private final FauxbotSensorConnection[] sensors =
-        new FauxbotSensorConnection[]
-        {
-            PrinterSimulator.XEncoderConnection,
-            PrinterSimulator.YEncoderConnection,
-        };
+            new FauxbotSensorConnection[]
+                    {
+                            PrinterSimulator.XEncoderConnection,
+                            PrinterSimulator.YEncoderConnection,
+                    };
 
     private final FauxbotActuatorConnection[] actuators =
-        new FauxbotActuatorConnection[]
-        {
-            PrinterSimulator.XMotorConnection,
-            PrinterSimulator.YMotorConnection,
-            PrinterSimulator.PenForwardConnection,
-            PrinterSimulator.PenReverseConnection,
-        };
+            new FauxbotActuatorConnection[]
+                    {
+                            PrinterSimulator.XMotorConnection,
+                            PrinterSimulator.YMotorConnection,
+                            PrinterSimulator.PenForwardConnection,
+                            PrinterSimulator.PenReverseConnection,
+                    };
 
     @SuppressWarnings("serial")
-    private final Map<FauxbotSensorConnection, String> sensorNameMap = new HashMap<FauxbotSensorConnection, String>()
-    {
+    private final Map<FauxbotSensorConnection, String> sensorNameMap = new HashMap<FauxbotSensorConnection, String>() {
         {
             this.put(PrinterSimulator.XEncoderConnection, "X encoder");
             this.put(PrinterSimulator.YEncoderConnection, "Y encoder");
@@ -50,8 +47,7 @@ public class PrinterSimulator extends SimulatorBase
     };
 
     @SuppressWarnings("serial")
-    private final Map<FauxbotActuatorConnection, String> motorNameMap = new HashMap<FauxbotActuatorConnection, String>()
-    {
+    private final Map<FauxbotActuatorConnection, String> motorNameMap = new HashMap<FauxbotActuatorConnection, String>() {
         {
             this.put(PrinterSimulator.XMotorConnection, "X Motor");
             this.put(PrinterSimulator.YMotorConnection, "Y Motor");
@@ -61,9 +57,9 @@ public class PrinterSimulator extends SimulatorBase
     };
 
     private static final double PrinterMinPosition = 0.0;
-    private static final int PrinterMin = (int)PrinterSimulator.PrinterMinPosition;
+    private static final int PrinterMin = (int) PrinterSimulator.PrinterMinPosition;
     private static final double PrinterMaxPosition = 200.0;
-    private static final int PrinterMax = (int)PrinterSimulator.PrinterMaxPosition;
+    private static final int PrinterMax = (int) PrinterSimulator.PrinterMaxPosition;
 
     private static final double PrinterMotorPower = 40.0;
     private static final double SlowRatio = 1.0; // friction?
@@ -83,8 +79,7 @@ public class PrinterSimulator extends SimulatorBase
     private Texture crosshairClosed;
 
     @Inject
-    public PrinterSimulator()
-    {
+    public PrinterSimulator() {
         int difference = PrinterSimulator.PrinterMax - PrinterSimulator.PrinterMin;
 
         this.pixMap = new Pixmap(difference, difference, Format.RGB888);
@@ -106,22 +101,18 @@ public class PrinterSimulator extends SimulatorBase
     }
 
     @Override
-    public FauxbotSensorConnection[] getSensors()
-    {
+    public FauxbotSensorConnection[] getSensors() {
         return this.sensors;
     }
 
     @Override
-    public FauxbotActuatorConnection[] getActuators()
-    {
+    public FauxbotActuatorConnection[] getActuators() {
         return this.actuators;
     }
 
     @Override
-    public String getSensorName(FauxbotSensorConnection connection)
-    {
-        if (this.sensorNameMap.containsKey(connection))
-        {
+    public String getSensorName(FauxbotSensorConnection connection) {
+        if (this.sensorNameMap.containsKey(connection)) {
             return this.sensorNameMap.get(connection);
         }
 
@@ -129,22 +120,18 @@ public class PrinterSimulator extends SimulatorBase
     }
 
     @Override
-    public double getSensorMin(FauxbotSensorConnection connection)
-    {
+    public double getSensorMin(FauxbotSensorConnection connection) {
         return PrinterSimulator.PrinterMinPosition;
     }
 
     @Override
-    public double getSensorMax(FauxbotSensorConnection connection)
-    {
+    public double getSensorMax(FauxbotSensorConnection connection) {
         return PrinterSimulator.PrinterMaxPosition;
     }
 
     @Override
-    public String getActuatorName(FauxbotActuatorConnection connection)
-    {
-        if (this.motorNameMap.containsKey(connection))
-        {
+    public String getActuatorName(FauxbotActuatorConnection connection) {
+        if (this.motorNameMap.containsKey(connection)) {
             return this.motorNameMap.get(connection);
         }
 
@@ -152,26 +139,22 @@ public class PrinterSimulator extends SimulatorBase
     }
 
     @Override
-    public double getMotorMin(FauxbotActuatorConnection connection)
-    {
+    public double getMotorMin(FauxbotActuatorConnection connection) {
         return -1.0;
     }
 
     @Override
-    public double getMotorMax(FauxbotActuatorConnection connection)
-    {
+    public double getMotorMax(FauxbotActuatorConnection connection) {
         return 1.0;
     }
 
     @Override
-    public boolean shouldSimulatePID()
-    {
+    public boolean shouldSimulatePID() {
         return true;
     }
 
     @Override
-    public void act(float delta)
-    {
+    public void act(float delta) {
         double currX = this.prevX;
         double currY = this.prevY;
         double currXVelocity = this.prevXVelocity;
@@ -179,25 +162,22 @@ public class PrinterSimulator extends SimulatorBase
 
         double xMotorPower = 0.0;
         FauxbotActuatorBase xActuator = FauxbotActuatorManager.get(PrinterSimulator.XMotorConnection);
-        if (xActuator != null && xActuator instanceof FauxbotMotorBase)
-        {
-            FauxbotMotorBase xMotor = (FauxbotMotorBase)xActuator;
+        if (xActuator != null && xActuator instanceof FauxbotMotorBase) {
+            FauxbotMotorBase xMotor = (FauxbotMotorBase) xActuator;
             xMotorPower = xMotor.get();
         }
 
         double yMotorPower = 0.0;
         FauxbotActuatorBase yActuator = FauxbotActuatorManager.get(PrinterSimulator.YMotorConnection);
-        if (yActuator != null && yActuator instanceof FauxbotMotorBase)
-        {
-            FauxbotMotorBase yMotor = (FauxbotMotorBase)yActuator;
+        if (yActuator != null && yActuator instanceof FauxbotMotorBase) {
+            FauxbotMotorBase yMotor = (FauxbotMotorBase) yActuator;
             yMotorPower = yMotor.get();
         }
 
         boolean currPenDown = false;
         FauxbotActuatorBase penActuator = FauxbotActuatorManager.get(PrinterSimulator.PenForwardConnection);
-        if (penActuator != null && penActuator instanceof FauxbotDoubleSolenoid)
-        {
-            FauxbotDoubleSolenoid penSolenoid = (FauxbotDoubleSolenoid)penActuator;
+        if (penActuator != null && penActuator instanceof FauxbotDoubleSolenoid) {
+            FauxbotDoubleSolenoid penSolenoid = (FauxbotDoubleSolenoid) penActuator;
             currPenDown = penSolenoid.get() == DoubleSolenoidValue.Forward;
         }
 
@@ -209,69 +189,52 @@ public class PrinterSimulator extends SimulatorBase
         currXVelocity -= PrinterSimulator.SlowRatio * currXVelocity * delta;
         currYVelocity -= PrinterSimulator.SlowRatio * currYVelocity * delta;
 
-        if (currXVelocity > PrinterSimulator.PrinterMaxVelocity)
-        {
+        if (currXVelocity > PrinterSimulator.PrinterMaxVelocity) {
             currXVelocity = PrinterSimulator.PrinterMaxVelocity;
-        }
-        else if (currXVelocity < PrinterSimulator.PrinterMinVelocity)
-        {
+        } else if (currXVelocity < PrinterSimulator.PrinterMinVelocity) {
             currXVelocity = PrinterSimulator.PrinterMinVelocity;
-        }
-        else if (Math.abs(currXVelocity) < PrinterSimulator.PrinterMinAbsoluteVelocity)
-        {
+        } else if (Math.abs(currXVelocity) < PrinterSimulator.PrinterMinAbsoluteVelocity) {
             currXVelocity = 0.0;
         }
 
-        if (currYVelocity > PrinterSimulator.PrinterMaxVelocity)
-        {
+        if (currYVelocity > PrinterSimulator.PrinterMaxVelocity) {
             currYVelocity = PrinterSimulator.PrinterMaxVelocity;
-        }
-        else if (currYVelocity < PrinterSimulator.PrinterMinVelocity)
-        {
+        } else if (currYVelocity < PrinterSimulator.PrinterMinVelocity) {
             currYVelocity = PrinterSimulator.PrinterMinVelocity;
-        }
-        else if (Math.abs(currYVelocity) < PrinterSimulator.PrinterMinAbsoluteVelocity)
-        {
+        } else if (Math.abs(currYVelocity) < PrinterSimulator.PrinterMinAbsoluteVelocity) {
             currYVelocity = 0.0;
         }
 
         currX += (currXVelocity * delta);
         currY += (currYVelocity * delta);
 
-        if (currX > PrinterSimulator.PrinterMaxPosition)
-        {
+        if (currX > PrinterSimulator.PrinterMaxPosition) {
             currX = PrinterSimulator.PrinterMaxPosition;
             currXVelocity = 0.0;
-        }
-        else if (currX < PrinterSimulator.PrinterMinPosition)
-        {
+        } else if (currX < PrinterSimulator.PrinterMinPosition) {
             currX = PrinterSimulator.PrinterMinPosition;
             currXVelocity = 0.0;
         }
 
-        if (currY > PrinterSimulator.PrinterMaxPosition)
-        {
+        if (currY > PrinterSimulator.PrinterMaxPosition) {
             currY = PrinterSimulator.PrinterMaxPosition;
             currYVelocity = 0.0;
-        }
-        else if (currY < PrinterSimulator.PrinterMinPosition)
-        {
+        } else if (currY < PrinterSimulator.PrinterMinPosition) {
             currY = PrinterSimulator.PrinterMinPosition;
             currYVelocity = 0.0;
         }
 
-        if (this.prevPenDown)
-        {
+        if (this.prevPenDown) {
             double distance = Math.sqrt(Math.pow(Math.abs(currX - this.prevX), 2) * Math.pow(Math.abs(currY - this.prevY), 2));
-            if (distance > 1.0)
-            {
+            if (distance > 1.0) {
                 ////throw new RuntimeException("don't expect to be moving that fast");
             }
 
-            int x = (int)Math.round(currX);
-            int y = (int)Math.round(currY);
+            int x = (int) Math.round(currX);
+            int y = (int) Math.round(currY);
             this.pixMap.drawPixel(x, y);
             this.currentPixMapTexture.draw(this.pixMap, 0, 0);
+
         }
 
         this.prevPenDown = currPenDown;
@@ -281,18 +244,17 @@ public class PrinterSimulator extends SimulatorBase
         this.prevYVelocity = currYVelocity;
 
         FauxbotSensorBase xSensor = FauxbotSensorManager.get(PrinterSimulator.XEncoderConnection);
-        if (xSensor != null && xSensor instanceof FauxbotEncoder)
-        {
-            FauxbotEncoder xEncoder = (FauxbotEncoder)xSensor;
-            xEncoder.set((int)this.prevX);
+        if (xSensor != null && xSensor instanceof FauxbotEncoder) {
+            FauxbotEncoder xEncoder = (FauxbotEncoder) xSensor;
+            xEncoder.set((int) this.prevX);
         }
 
         FauxbotSensorBase ySensor = FauxbotSensorManager.get(PrinterSimulator.YEncoderConnection);
-        if (ySensor != null && ySensor instanceof FauxbotEncoder)
-        {
-            FauxbotEncoder yEncoder = (FauxbotEncoder)ySensor;
-            yEncoder.set((int)this.prevY);
+        if (ySensor != null && ySensor instanceof FauxbotEncoder) {
+            FauxbotEncoder yEncoder = (FauxbotEncoder) ySensor;
+            yEncoder.set((int) this.prevY);
         }
+
     }
 
     /**
@@ -300,34 +262,29 @@ public class PrinterSimulator extends SimulatorBase
      * Remember that (0, 0) is at the bottom left!
      */
     @Override
-    public void draw(Batch batch, float parentAlpha)
-    {
+    public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
         batch.setColor(1f, 1f, 1f, parentAlpha);
         batch.draw(this.currentPixMapTexture, this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
         Texture crosshair;
-        if (this.prevPenDown)
-        {
+        if (this.prevPenDown) {
             crosshair = this.crosshairClosed;
-        }
-        else
-        {
+        } else {
             crosshair = this.crosshairOpen;
         }
 
         batch.draw(
-            crosshair,
-            this.getX() + 2.0f * (float)this.prevX - crosshair.getWidth() / 4.0f,
-            this.getY() + this.getHeight() - 2.0f * (float)this.prevY - crosshair.getHeight() / 4.0f,
-            crosshair.getWidth() / 2.0f,
-            crosshair.getHeight() / 2.0f);
+                crosshair,
+                this.getX() + 2.0f * (float) this.prevX - crosshair.getWidth() / 4.0f,
+                this.getY() + this.getHeight() - 2.0f * (float) this.prevY - crosshair.getHeight() / 4.0f,
+                crosshair.getWidth() / 2.0f,
+                crosshair.getHeight() / 2.0f);
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         this.currentPixMapTexture.dispose();
         this.pixMap.dispose();
         this.crosshairOpen.dispose();
