@@ -56,6 +56,12 @@ public class ElectronicsConstants
     //================================================== Elevator ==========================================================
 
     //================================================== Forklift =======================================================
+    public static final int FORKLIFT_LEFT_MOTOR_CHANNEL = 0;
+    public static final int FORKLIFT_RIGHT_MOTOR_CHANNEL = 1;
+
+    public static final int FORKLIFT_DOUBLE_SOLINOID_FORWARD = 7;
+    public static final int FORKLIFT_DOUBLE_SOLINOID_REVERSE = 8;
+
 
     //================================================== Forklift =======================================================
 
