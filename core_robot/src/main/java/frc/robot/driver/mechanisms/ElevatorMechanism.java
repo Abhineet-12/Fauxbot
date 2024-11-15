@@ -1,11 +1,9 @@
 package frc.robot.driver.mechanisms;
 
+import frc.lib.controllers.PIDHandler;
 import frc.lib.driver.IDriver;
 import frc.lib.mechanisms.IMechanism;
-import frc.lib.robotprovider.IEncoder;
-import frc.lib.robotprovider.IMotor;
-import frc.lib.robotprovider.IRobotProvider;
-import frc.lib.robotprovider.RobotMode;
+import frc.lib.robotprovider.*;
 import frc.robot.ElectronicsConstants;
 import frc.robot.driver.DigitalOperation;
 
@@ -18,70 +16,43 @@ public class ElevatorMechanism implements IMechanism {
     private final IMotor motor;
     private final IEncoder encoder;
     private int targetHeight = 0;
+    private PIDHandler pidHandler;
+    private double encoderValue;
 
     @Inject
-    public ElevatorMechanism(IDriver driver, IRobotProvider provider) {
+    public ElevatorMechanism(IDriver driver, IRobotProvider provider, ITimer timer) {
         this.driver = driver;
         this.motor = provider.getTalon(ElectronicsConstants.ELEVATOR_MOTOR_CH_ID);
         this.encoder = provider.getEncoder(ElectronicsConstants.ELEVATOR_ENCODER_CH_A_ID,
                 ElectronicsConstants.ELEVATOR_ENCODER_CH_B_ID);
+        this.pidHandler = new PIDHandler(1, 0, 0.1, 0, 1, -1.0, 1.0, timer);
     }
 
     @Override
     public void readSensors() {
-        double encoder = this.encoder.get();
+        encoderValue = this.encoder.get();
     }
 
     @Override
     public void update(RobotMode mode) {
 
-        double encoderValue = this.encoder.get();
-
         if (this.driver.getDigital(DigitalOperation.ElevatorFirstFloorButton)) {
             targetHeight = 0;
-            if (encoderValue > targetHeight) {
-                this.motor.set(-1);
-            } else {
-                this.motor.set(1);
-            }
         }
         if (this.driver.getDigital(DigitalOperation.ElevatorSecondFloorButton)) {
             targetHeight = 50;
-            if (encoderValue > targetHeight) {
-                this.motor.set(-1);
-            } else {
-                this.motor.set(1);
-            }
         }
         if (this.driver.getDigital(DigitalOperation.ElevatorThirdFloorButton)) {
             targetHeight = 100;
-            if (encoderValue > targetHeight) {
-                this.motor.set(-1);
-            } else {
-                this.motor.set(1);
-            }
         }
         if (this.driver.getDigital(DigitalOperation.ElevatorFourthFloorButton)) {
             targetHeight = 150;
-            if (encoderValue > targetHeight) {
-                this.motor.set(-1);
-            } else {
-                this.motor.set(1);
-            }
         }
         if (this.driver.getDigital(DigitalOperation.ElevatorFifthFloorButton)) {
             targetHeight = 200;
-            if (encoderValue > targetHeight) {
-                this.motor.set(-1);
-            } else {
-                this.motor.set(1);
-            }
         }
 
-        if (encoderValue == targetHeight) {
-            this.motor.set(0);
-        }
-
+        this.motor.set(pidHandler.calculatePosition(targetHeight, encoderValue));
     }
 
     @Override
