@@ -4,12 +4,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import frc.robot.driver.DigitalOperation;
-import frc.robot.lib.driver.IDriver;
-import frc.robot.lib.mechanisms.IMechanism;
-import frc.robot.lib.robotprovider.IEncoder;
-import frc.robot.lib.robotprovider.IMotor;
-import frc.robot.lib.robotprovider.IRobotProvider;
-import frc.robot.lib.robotprovider.RobotMode;
+import frc.lib.driver.IDriver;
+import frc.lib.mechanisms.IMechanism;
+import frc.lib.robotprovider.IEncoder;
+import frc.lib.robotprovider.IMotor;
+import frc.lib.robotprovider.IRobotProvider;
+import frc.lib.robotprovider.RobotMode;
 
 @Singleton
 public class ElevatorMechanism implements IMechanism {
