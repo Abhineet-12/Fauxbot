@@ -4,7 +4,6 @@ import java.util.ServiceLoader;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sun.java.swing.action.OpenAction;
 
 import frc.lib.driver.IDriver;
 import frc.lib.mechanisms.IMechanism;
@@ -12,13 +11,10 @@ import frc.lib.robotprovider.IDigitalInput;
 import frc.lib.robotprovider.IMotor;
 import frc.lib.robotprovider.IRobotProvider;
 import frc.lib.robotprovider.RobotMode;
-import frc.robot.driver.AnalogOperation;
 import frc.robot.driver.DigitalOperation;
-import frc.robot.mechanisms.GaragedoorMechanism.garageDoorState;
-import frc.robot.mechanisms.GaragedoorMechanism.garageDoorState;
 
 @Singleton
-public class GaragedoorMechanism implements IMechanism {
+public class GarageDoorMechanism implements IMechanism {
 
     private final IMotor garageMotor;
     private enum garageDoorState {
@@ -38,7 +34,7 @@ public class GaragedoorMechanism implements IMechanism {
     boolean throughBeamBroken;
 
     @Inject
-    public GaragedoorMechanism(IRobotProvider provider, IDriver driver) {
+    public GarageDoorMechanism(IRobotProvider provider, IDriver driver) {
         this.driver = driver;
         this.state = garageDoorState.open;
         this.garageMotor = provider.getTalon(0);

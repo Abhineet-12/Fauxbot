@@ -1,9 +1,11 @@
 package frc.robot.mechanisms;
 
+import frc.robot.driver.DigitalOperation;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import frc.robot.driver.DigitalOperation;
+// import frc.lib.controllers.PIDHandler;
 import frc.lib.driver.IDriver;
 import frc.lib.mechanisms.IMechanism;
 import frc.lib.robotprovider.IEncoder;
@@ -17,12 +19,14 @@ public class ElevatorMechanism implements IMechanism {
     private final IDriver driver;
     private final IMotor motor;
     private final IEncoder encoder;
+    // private final PIDHandler pid;
 
     double targetPos;
     double currentPos;
     
     @Inject
     public ElevatorMechanism(IRobotProvider provider, IDriver driver) {
+        
         this.driver = driver;
         this.motor = provider.getTalon(0);
         this.encoder = provider.getEncoder(0, 1);
@@ -57,6 +61,7 @@ public class ElevatorMechanism implements IMechanism {
         if (fifthFloorButtonPressed) {
             this.targetPos = 200.0;
         }
+
     }
 
     @Override

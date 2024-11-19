@@ -14,8 +14,8 @@ import frc.robot.driver.AnalogOperation;
 import frc.robot.driver.DigitalOperation;
 
 @Singleton
-public class ForkliftMechanism implements IMechanism
-{
+public class ForkliftMechanism implements IMechanism {
+    
     private final IMotor driveTrainLeft;
     private final IMotor driveTrainRight;
     private final IDoubleSolenoid lifter;
@@ -50,8 +50,9 @@ public class ForkliftMechanism implements IMechanism
             this.lifter.set(DoubleSolenoidValue.Reverse);
         }
 
-        this.driveTrainLeft.set(leftMotor);
+        this.driveTrainLeft.set(-leftMotor);
         this.driveTrainRight.set(rightMotor);
+        
     }
 
     @Override

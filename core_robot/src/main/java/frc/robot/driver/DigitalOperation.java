@@ -13,8 +13,14 @@ public enum DigitalOperation implements IOperation
     ForkliftUp,
     ForkliftDown,
     // Elevator operations:
-
+    FirstFloorButton,
+    SecondFloorButton,
+    ThirdFloorButton,
+    FourthFloorButton,
+    FifthFloorButton,
     // Printer operations:
 
     // Shooter operations:
+    SpinButton,
+    FireButton,
 }

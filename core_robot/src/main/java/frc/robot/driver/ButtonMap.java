@@ -70,19 +70,19 @@ public class ButtonMap implements IButtonMap
             DigitalOperation.ForkliftUp,
             UserInputDevice.Driver,
             UserInputDeviceButton.XBONE_A_BUTTON,
-            ButtonType.Simple),
+            ButtonType.Click),
 
         new DigitalOperationDescription(
             DigitalOperation.ForkliftDown,
             UserInputDevice.Driver,
             UserInputDeviceButton.XBONE_B_BUTTON,
-            ButtonType.Simple),
+            ButtonType.Click),
         
-        new DigitalOperationDescription(
-            DigitalOperation.Button,
-            UserInputDevice.Driver,
-            UserInputDeviceButton.XBONE_Y_BUTTON,
-            ButtonType.Simple),
+        // new DigitalOperationDescription(
+        //     DigitalOperation.Button,
+        //     UserInputDevice.Driver,
+        //     UserInputDeviceButton.XBONE_Y_BUTTON,
+        //     ButtonType.Click),
     };
 
     public static MacroOperationDescription[] MacroSchema = new MacroOperationDescription[]
