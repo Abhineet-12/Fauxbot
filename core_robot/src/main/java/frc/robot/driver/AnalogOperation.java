@@ -11,6 +11,8 @@ public enum AnalogOperation implements IOperation
     DriveTrainLeft,
     DriveTrainRight,
     // Printer operations:
-
+    xAxisPosition,
+    yAxisPosition,
     // Shooter operations:
+    HoodAnglePosition,
 }

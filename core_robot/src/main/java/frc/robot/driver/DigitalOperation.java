@@ -19,7 +19,8 @@ public enum DigitalOperation implements IOperation
     FourthFloorButton,
     FifthFloorButton,
     // Printer operations:
-
+    PenUp,
+    PenDown,
     // Shooter operations:
     SpinButton,
     FireButton,
