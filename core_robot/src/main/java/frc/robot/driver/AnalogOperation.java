@@ -15,4 +15,6 @@ public enum AnalogOperation implements IOperation
     yAxisPosition,
     // Shooter operations:
     HoodAnglePosition,
+    // Test operations:
+    TestAnalogOperation,
 }

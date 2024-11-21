@@ -24,4 +24,6 @@ public enum DigitalOperation implements IOperation
     // Shooter operations:
     SpinButton,
     FireButton,
+    // Test operations
+    TestButton,
 }
