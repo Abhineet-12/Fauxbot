@@ -53,6 +53,12 @@ public class ButtonMap implements IButtonMap
             UserInputDevice.Driver,
             UserInputDeviceButton.XBONE_A_BUTTON,
             ButtonType.Toggle),*/
+        new DigitalOperationDescription {
+            DigitalOperation.Button,
+            UserInputDevice.Driver,
+            UserInputDeviceButton.XBONE_Y_BUTTON,
+            ButtonType.Click
+        }
     };
 
     public static MacroOperationDescription[] MacroSchema = new MacroOperationDescription[]
@@ -87,6 +93,7 @@ public class ButtonMap implements IButtonMap
     public DigitalOperationDescription[] getDigitalOperationSchema()
     {
         return ButtonMap.DigitalOperationSchema;
+        
     }
 
     @Override

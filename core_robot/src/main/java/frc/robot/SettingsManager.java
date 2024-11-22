@@ -14,6 +14,8 @@ public class SettingsManager
     {
         List<IMechanism> mechanismList = new ArrayList<IMechanism>();
         // mechanismList.add(injector.getInstance(SomeMechanism.class));
+        //mechanismList.add(injector.getInstance(type:ShooterMechanism.class));
+        mechanismList.add(injector.getInstance(type:GarageDoorMechanism.class));
         return mechanismList;
     }
 
