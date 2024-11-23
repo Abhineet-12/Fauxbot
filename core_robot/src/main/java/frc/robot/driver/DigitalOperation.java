@@ -1,6 +1,10 @@
 package frc.robot.driver;
 
+import frc.lib.driver.AnalogAxis;
 import frc.lib.driver.IOperation;
+import frc.lib.driver.descriptions.UserInputDevice;
+import frc.robot.ElectronicsConstants;
+import frc.robot.TuningConstants;
 
 public enum DigitalOperation implements IOperation
 {
@@ -8,8 +12,9 @@ public enum DigitalOperation implements IOperation
     ExampleB,
 
     // GarageDoor operations:
-
+    Button,
     // Forklift operations: 
+    ForkLiftUp,ForkLiftDown
 
     // Elevator operations:
 
