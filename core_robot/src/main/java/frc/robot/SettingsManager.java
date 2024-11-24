@@ -7,6 +7,7 @@ import com.google.inject.Injector;
 
 import frc.lib.mechanisms.IMechanism;
 import frc.lib.robotprovider.*;
+import frc.robot.mechanisms.GarageDoorMechanism;
 
 public class SettingsManager
 {
@@ -14,7 +15,10 @@ public class SettingsManager
     {
         List<IMechanism> mechanismList = new ArrayList<IMechanism>();
         // mechanismList.add(injector.getInstance(SomeMechanism.class));
+        //mechanismList.add(injector.getInstance(Forklift.class));
+        mechanismList.add(injector.getInstance(GarageDoorMechanism.class));
         return mechanismList;
+
     }
 
     public static ILogger getLogger(Injector injector)
@@ -28,11 +32,6 @@ public class SettingsManager
         IRobotProvider robotProvider = injector.getInstance(IRobotProvider.class);
         IDriverStation driverStation = robotProvider.getDriverStation();
         MatchType matchType = driverStation.getMatchType();
-        if (matchType == MatchType.None && TuningConstants.LOG_FILE_ONLY_COMPETITION_MATCHES)
-        {
-            return smartDashboardLogger;
-        }
-
         // NI's Linux RTOS automatically mounts USB Sticks as /U/ and /V/, so long as they are formatted as FAT32
         // https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z000000P7iaSAC&l=en-US
         // https://www.ni.com/en-us/support/documentation/supplemental/18/file-system-compatibility-with-the-ni-linux-real-time-os.html

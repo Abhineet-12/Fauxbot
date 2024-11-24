@@ -36,7 +36,19 @@ public class ButtonMap implements IButtonMap
 
     public static AnalogOperationDescription[] AnalogOperationSchema = new AnalogOperationDescription[]
     {
-        /** Example Analog operation entry:
+        new AnalogOperationDescription(
+            AnalogOperation.LeftMotorAnalog,
+            UserInputDevice.Driver,
+            AnalogAxis.XBONE_LSY,
+            ElectronicsConstants.INVERT_XBONE_LEFT_Y_AXIS,
+            0.1),
+        new AnalogOperationDescription(
+            AnalogOperation.RightMotorAnalog,
+            UserInputDevice.Driver,
+            AnalogAxis.XBONE_RSY,
+            ElectronicsConstants.INVERT_XBONE_RIGHT_Y_AXIS,
+            0.1),
+        /** Exa mple Analog operation entry:
         new AnalogOperationDescription(
             AnalogOperation.ExampleOne,
             UserInputDevice.Driver,
@@ -47,13 +59,34 @@ public class ButtonMap implements IButtonMap
 
     public static DigitalOperationDescription[] DigitalOperationSchema = new DigitalOperationDescription[]
     {
-        /** Example Digital operation entry:
+        /*
+         Example Digital operation entry:
         new DigitalOperationDescription(
             DigitalOperation.ExampleA,
             UserInputDevice.Driver,
             UserInputDeviceButton.XBONE_A_BUTTON,
-            ButtonType.Toggle),*/
-    };
+            ButtonType.Toggle),
+
+        new DigitalOperationDescription (
+                DigitalOperation.ForkliftUp,
+                UserInputDevice.Driver,
+                UserInputDeviceButton.XBONE_A_BUTTON,
+                ButtonType.Toggle),
+        
+        new DigitalOperationDescription (
+            DigitalOperation.ForkliftDown,
+            UserInputDevice.Driver,
+            UserInputDeviceButton.XBONE_B_BUTTON,
+            ButtonType.Toggle),
+        
+        */
+        new DigitalOperationDescription(
+            DigitalOperation.Button,
+            UserInputDevice.Driver,
+            UserInputDeviceButton.XBONE_Y_BUTTON,
+            ButtonType.Click
+        )
+        };
 
     public static MacroOperationDescription[] MacroSchema = new MacroOperationDescription[]
     {

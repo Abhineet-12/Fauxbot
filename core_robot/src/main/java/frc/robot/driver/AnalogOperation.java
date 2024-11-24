@@ -8,7 +8,10 @@ public enum AnalogOperation implements IOperation
     ExampleTwo,
 
     // Forklift operations: 
+    LeftMotorAnalog,
+    RightMotorAnalog,
 
+    
     // Printer operations:
 
     // Shooter operations:

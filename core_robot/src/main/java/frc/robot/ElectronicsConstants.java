@@ -52,6 +52,10 @@ public class ElectronicsConstants
     public static final double PNEUMATICS_MAX_PSI = 120.0;
 
     //================================================== Garage Door =======================================================
+public static final  int GARAGE_DOOR_MOTOR = 0;
+public static final  int GARAGE_DOOR_SENSOR_OPEN = 1;
+public static final  int GARAGE_DOOR_SENSOR_CLOSED = 2;
+public static final  int GARAGE_DOOR_THROUGH_BEAM = 0;
 
     //================================================== Elevator ==========================================================
 
