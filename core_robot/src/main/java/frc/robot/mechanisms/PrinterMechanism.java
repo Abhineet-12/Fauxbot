@@ -7,9 +7,10 @@ import frc.lib.driver.IDriver;
 import frc.lib.mechanisms.IMechanism;
 import frc.lib.robotprovider.DoubleSolenoidValue;
 import frc.lib.robotprovider.IDoubleSolenoid;
-import frc.lib.robotprovider.IMotor;
 import frc.lib.robotprovider.IRobotProvider;
+import frc.lib.robotprovider.ITalonSRX;
 import frc.lib.robotprovider.RobotMode;
+import frc.lib.robotprovider.TalonSRXControlMode;
 import frc.robot.driver.AnalogOperation;
 import frc.robot.driver.DigitalOperation;
 
@@ -17,13 +18,14 @@ import frc.robot.driver.DigitalOperation;
 public class PrinterMechanism implements IMechanism {
 
     private final IDriver driver;
-    private final IMotor xAxisMotor;
-    private final IMotor yAxisMotor;
+    private final ITalonSRX xAxisMotor;
+    private final ITalonSRX yAxisMotor;
     private final IDoubleSolenoid pen;
     
 
     @Inject
     public PrinterMechanism(IRobotProvider provider, IDriver driver) {
+        
         this.driver = driver;
         this.xAxisMotor = provider.getTalonSRX(0);
         this.yAxisMotor = provider.getTalonSRX(1);
@@ -38,8 +40,11 @@ public class PrinterMechanism implements IMechanism {
 
     @Override
     public void update(RobotMode mode) {
-        double desiredXPos = this.driver.getAnalog(AnalogOperation.xAxisPosition);
-        double desiredYPos = this.driver.getAnalog(AnalogOperation.yAxisPosition);
+        double xAxisMotorPower = this.driver.getAnalog(AnalogOperation.xAxisPosition);
+        double yAxisMotorPower = this.driver.getAnalog(AnalogOperation.yAxisPosition);
+        
+        this.xAxisMotor.set(TalonSRXControlMode.MotionMagicPosition, xAxisMotorPower);
+        this.yAxisMotor.set(TalonSRXControlMode.MotionMagicPosition, yAxisMotorPower);
 
         boolean penDownPressed = this.driver.getDigital(DigitalOperation.PenDown);
         boolean penUpPressed = this.driver.getDigital(DigitalOperation.PenUp);

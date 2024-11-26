@@ -50,7 +50,7 @@ public class ForkliftMechanism implements IMechanism {
             this.lifter.set(DoubleSolenoidValue.Reverse);
         }
 
-        this.driveTrainLeft.set(-leftMotor);
+        this.driveTrainLeft.set(leftMotor);
         this.driveTrainRight.set(rightMotor);
         
     }

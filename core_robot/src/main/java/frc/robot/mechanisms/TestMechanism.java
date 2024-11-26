@@ -7,6 +7,7 @@ import frc.lib.driver.IDriver;
 import frc.lib.mechanisms.IMechanism;
 import frc.lib.robotprovider.DoubleSolenoidValue;
 import frc.lib.robotprovider.IDoubleSolenoid;
+import frc.lib.robotprovider.IEncoder;
 import frc.lib.robotprovider.IMotor;
 import frc.lib.robotprovider.IRobotProvider;
 import frc.lib.robotprovider.RobotMode;
@@ -15,22 +16,35 @@ import frc.robot.driver.DigitalOperation;
 
 @Singleton
 public class TestMechanism implements IMechanism {
+    
     private final IDriver driver;
     private final IMotor motor;
     private final IDoubleSolenoid doubleSolenoid;
+    private final IEncoder encoder;
+    double encoderReading;
+    
+    
     @Inject
     public TestMechanism(IRobotProvider provider, IDriver driver) {
+        
         this.driver = driver;
 
         this.motor = provider.getTalon(0);
-        // the provider.getTalon(pwmChannel); is a method that tells the motor what type it is, and what pwm channel it is connected to.
+        // this provider method is a method that tells the motor what type it is, and what pwm channel it is connected to.
 
         this.doubleSolenoid = provider.getDoubleSolenoid(null, 7, 8);
         // this provider method tells the module type of the double solenoid, and the forward and reverse channel that it is connected to.
+
+        this.encoder = provider.getEncoder(0, 1);
+        // this provider method allows the variable to get the information of the encoder from the digital IO channels in the parameters.
+    
     }
     @Override
     public void readSensors() {
         
+        this.encoderReading = this.encoder.get();
+        // this sets the doulble known as encoderReading to whatever the encoder reads from the physical encoder.
+    
     }
 
     @Override

@@ -1,7 +1,5 @@
 package frc.robot.mechanisms;
 
-import java.util.ServiceLoader;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -36,7 +34,7 @@ public class GarageDoorMechanism implements IMechanism {
     @Inject
     public GarageDoorMechanism(IRobotProvider provider, IDriver driver) {
         this.driver = driver;
-        this.state = garageDoorState.open;
+        this.state = garageDoorState.closed;
         this.garageMotor = provider.getTalon(0);
         this.openSensor = provider.getDigitalInput(1);
         this.closedSensor = provider.getDigitalInput(2);
@@ -53,28 +51,37 @@ public class GarageDoorMechanism implements IMechanism {
     @Override
     public void update(RobotMode mode) {
         boolean button = this.driver.getDigital(DigitalOperation.Button);
-        if (button) {
-            if (this.state == garageDoorState.open) {
-                this.state = garageDoorState.closing;
-            }
-            if (this.state == garageDoorState.closed) {
-                this.state = garageDoorState.opening;
-            }
-            if (this.state == garageDoorState.closing) {
-                this.state = garageDoorState.opening;
-            }
-            if (this.state == garageDoorState.opening) {
+        
+        
+        if (this.state == garageDoorState.open) {
+            this.garageMotor.set(0.0);
+            if (button) {
                 this.state = garageDoorState.closing;
             }
         }
-        if (throughBeamBroken && this.state == garageDoorState.closing) {
-            this.state = garageDoorState.opening;
+        if (this.state == garageDoorState.closed) {
+            this.garageMotor.set(0.0);
+            if (button) {
+                this.state = garageDoorState.opening;
+            }
         }
-        if (openSensorTriggered) {
-            this.state = garageDoorState.open;
+        if (this.state == garageDoorState.opening) {
+            this.garageMotor.set(-1.0);
+            if (button) {
+                this.state = garageDoorState.closing;
+            }
+            if (openSensorTriggered) {
+                this.state = garageDoorState.open;
+            }
         }
-        if (closedSensorTriggered) {
-            this.state = garageDoorState.closed;
+        if (this.state == garageDoorState.closing) {
+            this.garageMotor.set(1.0);
+            if (button || throughBeamBroken) {
+                this.state = garageDoorState.opening;
+            }
+            if (closedSensorTriggered) {
+                this.state = garageDoorState.closed;
+            }
         }
     }
 

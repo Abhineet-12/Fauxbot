@@ -5,12 +5,13 @@ import frc.robot.driver.DigitalOperation;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-// import frc.lib.controllers.PIDHandler;
+import frc.lib.controllers.PIDHandler;
 import frc.lib.driver.IDriver;
 import frc.lib.mechanisms.IMechanism;
 import frc.lib.robotprovider.IEncoder;
 import frc.lib.robotprovider.IMotor;
 import frc.lib.robotprovider.IRobotProvider;
+import frc.lib.robotprovider.ITimer;
 import frc.lib.robotprovider.RobotMode;
 
 @Singleton
@@ -19,17 +20,19 @@ public class ElevatorMechanism implements IMechanism {
     private final IDriver driver;
     private final IMotor motor;
     private final IEncoder encoder;
-    // private final PIDHandler pid;
+    private final PIDHandler pid;
 
     double targetPos;
     double currentPos;
     
     @Inject
-    public ElevatorMechanism(IRobotProvider provider, IDriver driver) {
+    public ElevatorMechanism(IRobotProvider provider, IDriver driver, ITimer timer) {
         
         this.driver = driver;
         this.motor = provider.getTalon(0);
         this.encoder = provider.getEncoder(0, 1);
+        this.pid = new PIDHandler(1.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0, timer);
+
 
     }
     
@@ -40,33 +43,44 @@ public class ElevatorMechanism implements IMechanism {
 
     @Override
     public void update(RobotMode mode) {
+        
         boolean firstFloorButtonPressed = this.driver.getDigital(DigitalOperation.FirstFloorButton);
         boolean secondFloorButtonPressed = this.driver.getDigital(DigitalOperation.SecondFloorButton);
         boolean thirdFloorButtonPressed = this.driver.getDigital(DigitalOperation.ThirdFloorButton);
         boolean fourthFloorButtonPressed = this.driver.getDigital(DigitalOperation.FourthFloorButton);
         boolean fifthFloorButtonPressed = this.driver.getDigital(DigitalOperation.FifthFloorButton);
+        
+        double motorPower = this.pid.calculatePosition(targetPos, currentPos);
 
         if (firstFloorButtonPressed) {
             this.targetPos = 0.0;
         }
+        
         if (secondFloorButtonPressed) {
             this.targetPos = 50.0;
         }
+        
         if (thirdFloorButtonPressed) {
             this.targetPos = 100.0;
         }
+        
         if (fourthFloorButtonPressed) {
             this.targetPos = 150.0;
         }
+        
         if (fifthFloorButtonPressed) {
             this.targetPos = 200.0;
         }
+
+        this.motor.set(motorPower);
 
     }
 
     @Override
     public void stop() {
+
         this.motor.set(0.0);
+
     }
     
 }

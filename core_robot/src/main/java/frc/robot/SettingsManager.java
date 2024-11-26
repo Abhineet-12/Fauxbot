@@ -7,13 +7,18 @@ import com.google.inject.Injector;
 
 import frc.lib.mechanisms.IMechanism;
 import frc.lib.robotprovider.*;
+import frc.robot.mechanisms.ElevatorMechanism;
+import frc.robot.mechanisms.ForkliftMechanism;
+import frc.robot.mechanisms.GarageDoorMechanism;
+import frc.robot.mechanisms.PrinterMechanism;
+import frc.robot.mechanisms.ShooterMechanism;
 
 public class SettingsManager
 {
     public static List<IMechanism> getActiveMechanisms(Injector injector)
     {
         List<IMechanism> mechanismList = new ArrayList<IMechanism>();
-        // mechanismList.add(injector.getInstance(SomeMechanism.class));
+        mechanismList.add(injector.getInstance(PrinterMechanism.class));
         return mechanismList;
     }
 
