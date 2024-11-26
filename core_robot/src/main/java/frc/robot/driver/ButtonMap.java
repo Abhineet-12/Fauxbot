@@ -16,6 +16,7 @@ public class ButtonMap implements IButtonMap
 {
     private static ShiftDescription[] ShiftButtonSchema = new ShiftDescription[]
     {
+        /** 
         new ShiftDescription(
             Shift.DriverDebug,
             UserInputDevice.Driver,
@@ -28,6 +29,7 @@ public class ButtonMap implements IButtonMap
             Shift.Test1Debug,
             UserInputDevice.Test1,
             UserInputDeviceButton.XBONE_LEFT_BUTTON),
+            */
         // new ShiftDescription(
         //     Shift.Test2Debug,
         //     UserInputDevice.Test2,
@@ -43,6 +45,20 @@ public class ButtonMap implements IButtonMap
             AnalogAxis.XBONE_LSX,
             ElectronicsConstants.INVERT_XBONE_LEFT_Y_AXIS,
             0.1),*/
+            /** 
+            new AnalogOperationDescription(
+                AnalogOperation.MoveLeft,
+                UserInputDevice.Driver,
+                AnalogAxis.XBONE_LSY,
+                false, // ElectronicsConstants.INVERT_XBONE_LEFT_Y_AXIS,
+                0.1),
+            new AnalogOperationDescription(
+                AnalogOperation.MoveRight,
+                UserInputDevice.Driver,
+                AnalogAxis.XBONE_RSY,
+                false, // ElectronicsConstants.INVERT_XBONE_RIGHT_Y_AXIS,
+                0.1),
+                */
     };
 
     public static DigitalOperationDescription[] DigitalOperationSchema = new DigitalOperationDescription[]
@@ -53,6 +69,24 @@ public class ButtonMap implements IButtonMap
             UserInputDevice.Driver,
             UserInputDeviceButton.XBONE_A_BUTTON,
             ButtonType.Toggle),*/
+            /** 
+            new DigitalOperationDescription(
+                DigitalOperation.LiftDown,
+                UserInputDevice.Driver,
+                UserInputDeviceButton.XBONE_A_BUTTON,
+                ButtonType.Click),
+            new DigitalOperationDescription(
+                DigitalOperation.LiftUp,
+                UserInputDevice.Driver,
+                UserInputDeviceButton.XBONE_Y_BUTTON,
+                ButtonType.Click),
+                */
+            new DigitalOperationDescription(
+                DigitalOperation.Button,
+                UserInputDevice.Driver,
+                UserInputDeviceButton.XBONE_B_BUTTON,
+                ButtonType.Click
+            )
     };
 
     public static MacroOperationDescription[] MacroSchema = new MacroOperationDescription[]
