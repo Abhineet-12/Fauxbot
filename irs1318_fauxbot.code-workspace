@@ -17,7 +17,8 @@
 		"java.format.settings.profile": "Eclipse",
 		"java.import.gradle.version": "7.5.1",
 		"java.format.onType.enabled": false,
-		"editor.formatOnSave": false
+		"editor.formatOnSave": false,
+		"java.debug.settings.onBuildFailureProceed": true
 	},
 	"launch": {
 		"configurations": [

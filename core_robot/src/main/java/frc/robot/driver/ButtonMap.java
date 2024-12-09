@@ -1,5 +1,6 @@
 package frc.robot.driver;
 
+import java.lang.invoke.LambdaConversionException;
 import java.util.EnumSet;
 
 import javax.inject.Singleton;
@@ -43,6 +44,20 @@ public class ButtonMap implements IButtonMap
             AnalogAxis.XBONE_LSX,
             ElectronicsConstants.INVERT_XBONE_LEFT_Y_AXIS,
             0.1),*/
+       /*  new AnalogOperationDescription(
+            AnalogOperation.TurnLeft,
+            UserInputDevice.Driver,
+            AnalogAxis.XBONE_LSX,
+            ElectronicsConstants.INVERT_XBONE_LEFT_Y_AXIS,
+            0.1), */
+
+        /*new AnalogOperationDescription(
+            AnalogOperation.TurnRight,
+            UserInputDevice.Driver,
+            AnalogAxis.XBONE_RSX,
+            ElectronicsConstants.INVERT_XBONE_LEFT_Y_AXIS,
+            0.1), */
+        
     };
 
     public static DigitalOperationDescription[] DigitalOperationSchema = new DigitalOperationDescription[]
@@ -53,6 +68,24 @@ public class ButtonMap implements IButtonMap
             UserInputDevice.Driver,
             UserInputDeviceButton.XBONE_A_BUTTON,
             ButtonType.Toggle),*/
+            /*new DigitalOperationDescription(
+                DigitalOperation.ForkliftUp,
+                UserInputDevice.Driver,
+                UserInputDeviceButton.XBONE_B_BUTTON,
+                ButtonType.Toggle),
+            */
+            /* 
+            new DigitalOperationDescription(
+                DigitalOperation.ForkliftDown,
+                UserInputDevice.Driver,
+                UserInputDeviceButton.XBONE_A_BUTTON,
+                ButtonType.Toggle),
+            */
+            new DigitalOperationDescription(
+                DigitalOperation.ButtonPress,
+                UserInputDevice.Driver,
+                UserInputDeviceButton.XBONE_X_BUTTON,
+                ButtonType.Toggle),
     };
 
     public static MacroOperationDescription[] MacroSchema = new MacroOperationDescription[]
